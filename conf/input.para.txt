@@ -1,0 +1,24 @@
+inputX=./diabX.csv isCol=1             # tab delimited input text file of covarites, isCol=1 means column vectors, otherwise row vectors
+inputY=./diabY.txt isCol=0             # tab delimited input text file of target variables
+resDir=./tst
+nConVar=3
+nBinVar=4
+priorFile=./tst/prior.template.txt     # configuration file for priors
+kernelFile=./tst/kernel.template.txt   # configuration file for kernels
+varIndex=1 varName=age     interaction=1   selected=1  kernelType=1               # variable 1, interaction allowed for age
+varIndex=2 varName=season  interaction=0   selected=0  kernelType=2 period=12     # variable 2, 
+varIndex=3 varName=sero    interaction=0   selected=0  kernelType=3 a=0.5 b=6 c=20
+varIndex=4 varName=gender     interaction=0   selected=0  kernelType=6
+varIndex=5 varName=loc     interaction=0   selected=0  kernelType=6                   
+varIndex=6 varName=group     interaction=1   selected=0  kernelType=6
+varIndex=7 varName=id      interaction=1   selected=1  kernelType=5               # last variable MUST be id, selected=1 means id is included in the base model and not subjected to selection
+delInterTerms=gender*age,gender*group # interaction terms that should not be included, optional
+#delInterTerms=gender*age,gender*group # comment this line if no specific interaction terms in mind
+looCutOff=0.8    # threshold for loocv factor
+scvCutOff=0.95   # threshold for scv factor
+nBBSample=20000  # number of bootstrap samples in model selection
+comVarCutOff=0.01  # minimum explained variance for interaction components
+maxRunTime=Inf   # max running time for a worker or slave
+maxIdleTime=120  # max idle time for a worker or slave, 120 minutes
+genTestX=1  ageInd=1   RawXFilledFile='./tst/rawdata.filled.txt' testXFilledFile=''   # whether generating test X for ploting components, ageInd is the index of age covariate, RawXFilledFile: raw X file with imputed missing values, testXFilledFile: test X file with imputed missing values
+plotFigure=1  xInd=1  colorInd=6   # Figure generation options, plotFigure=0 no figure generation, xInd: default covariate index for x-axis, colorInd: default covariate index for coloring
