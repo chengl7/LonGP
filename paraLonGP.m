@@ -1,7 +1,6 @@
 function paraLonGP(resDir, iTarget, varargin)
 % resDir: directory to store results, ith target variable will be stored in subdirectory "i" under resDir, i.e. "resDir/Results/i"
 % iTarget: index of target, 0 is for task manager
-% paraFile: parameter file, i.e. input.para.txt
 
 % Lu Cheng
 % 01.05.2018
