@@ -53,15 +53,16 @@ else
         mkdir(targetDir);
     end
     
-    createFile(sprintf('%s%sworker.run.txt',targetDir));
+    runFile = sprintf('%s%sworker.run.txt',targetDir,filesep);
+    createFile(runFile);
     lonGP(resDir,iTarget);
-    delFile(sprintf('%s%sworker.run.txt',targetDir));
+    delFile(runFile);
     
     slave(targetDir,varargin{:});
 end
 
 function createFile(filename)
-fid = fopen(filename);
+fid = fopen(filename,'w');
 fclose(fid);
 
 function delFile(filename)
