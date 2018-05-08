@@ -3,3 +3,7 @@ to do list
 1. test the code
 
 2. usage information for commonly used functions
+
+There need to headers both for input X and Y.
+input parameter file must be named as "input.para.txt" and placed in the output directory
+age is required in X when ploting figures is needed
