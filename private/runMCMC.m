@@ -2,7 +2,7 @@ function [R, rfull, flag] = runMCMC(gp,x,y,nRep,statefile)
 % run MCMC inference, resumable
 %
 % Lu Cheng
-% 21.04.2018
+% 15.05.2018
 
 nMCSample = 2500;
 nMCDisplay = 500;
@@ -25,14 +25,23 @@ assert(nRep>=1 && nRep<=4);
 stateFileFlag = exist(statefile,'file')>0;
 
 if stateFileFlag
-    % update relevant variables, jump to the correct section
-    load(statefile,'rep','ri','replicateRecArr','replicateThetaArr','recArr');
+    try 
+        % update relevant variables, jump to the correct section
+        load(statefile,'rep','ri','replicateRecArr','replicateThetaArr','recArr');
+    catch ME
+        fprintf('%s %s\n', ME.identifier, ME.message);
+        fprintf('Delete file %s.\n', statefile);
+        delete(statefile);
+        stateFileFlag = false;
+    end
     
     srep = rep;
     sri = ri+1;
     
     fprintf('Resuming from rep=%d mcmc_round=%d.\n',rep,ri);
-else
+end
+
+if ~stateFileFlag
     replicateRecArr = cell(1,nRep);
     replicateThetaArr = cell(1,nRep);
     recArr = cell(4,4);
