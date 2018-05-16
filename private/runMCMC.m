@@ -28,17 +28,17 @@ if stateFileFlag
     try 
         % update relevant variables, jump to the correct section
         load(statefile,'rep','ri','replicateRecArr','replicateThetaArr','recArr');
+        
+        srep = rep;
+        sri = ri+1;
+
+        fprintf('Resuming from rep=%d mcmc_round=%d.\n',rep,ri);
     catch ME
         fprintf('%s %s\n', ME.identifier, ME.message);
         fprintf('Delete file %s.\n', statefile);
         delete(statefile);
         stateFileFlag = false;
     end
-    
-    srep = rep;
-    sri = ri+1;
-    
-    fprintf('Resuming from rep=%d mcmc_round=%d.\n',rep,ri);
 end
 
 if ~stateFileFlag
