@@ -91,15 +91,16 @@ end
 
 
 % kernels for interactions between two binary covariates
+% last binary covariate is id, so no interaction allowed
 cf4 = {};
 cfname4 = {};
-for i=1:nbin-1
+for i=1:nbin-2
     iBin1 = binInds(i);
     if binInterArr(iBin1)==0
         continue;
     end
     
-    for j=i+1:nbin
+    for j=i+1:nbin-1
         iBin2 = binInds(j);
         if binInterArr(iBin2)==0
             continue;
