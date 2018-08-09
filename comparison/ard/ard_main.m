@@ -9,6 +9,7 @@ load(testfile, 'y','ageVec','seroAge_original','gVec','locVec','genderVec','idVe
 groupVec = ~gVec;
 
 seroAgeVec = zeros(520,1);
+% tmp = seroAge';
 tmp = seroAge_original';
 [seroagen, seromu, serostd] = normalize(tmp(:));
 seroAgeVec(261:end) = seroagen;
@@ -17,12 +18,11 @@ seroAgeVec(261:end) = seroagen;
 [agen, agemu, agestd] = normalize(ageVec);
 X = [agen seroAgeVec locVec genderVec groupVec idVec];
 
-theta0 = [log(0.3)*ones(1,6) log(1)];
+theta0 = [log(0.5)*ones(1,6) log(1)];
 
 kfcn = @(XN,XM,theta) myker(XN,XM,theta);
 
-% gprMdl = fitrgp(X,yn,'KernelFunction',kfcn,'KernelParameters',theta0);
-gprMdl = fitrgp(X,yn,'KernelFunction',kfcn,'KernelParameters',theta0, 'OptimizeHyperparameters','auto');
+gprMdl = fitrgp(X,yn,'KernelFunction',kfcn,'KernelParameters',theta0,'Sigma',0.2);
 
 estTheta = exp(gprMdl.KernelInformation.KernelParameters)';
 fprintf('sigma2_f=%.2f  sigma2_noise=%.2f.\n',estTheta(end), gprMdl.Sigma^2);
@@ -40,6 +40,7 @@ selVarNames = varNames(tmpinds); % first is y
 selModelName = strjoin(selVarNames,',');
 fprintf('selected model: %s\n',selModelName);
 
+figure
 ypred = resubPredict(gprMdl);
 clf
 hold on
@@ -48,6 +49,7 @@ for i=1:20
     plot(ageVec(tmpinds),ypred(tmpinds),'bs-');
     plot(ageVec(tmpinds),yn(tmpinds),'rx');
 end
+title('prediction of ard kernel')
 
 
 function [xx, xmu, xstd] = normalize(x)

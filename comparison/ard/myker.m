@@ -31,14 +31,14 @@ for i=1:nConVar-1
     y = y - 0.5 * tmpdist/lenVar(i);
 end
 
-% sero
+% dise
 for i=nConVar
     tmpval1 = XN(:,i);
     tmpval2 = XM(:,i);
     
     tmpflagdist = calBinDist(flagVec1, flagVec2);
     tmpdist = pdist2(tmpval1,tmpval2).^2;
-    tmpdist(~tmpflagdist) = 0;
+    tmpdist(~tmpflagdist) = 4;
         
     y = y - 0.5 * tmpdist/lenVar(i);
 end
@@ -56,7 +56,7 @@ for i=nConVar+(1:nBinVar)
     end
     
     tmpdist(tmpflagdist) = 0;
-    tmpdist(~tmpflagdist) = 1;
+    tmpdist(~tmpflagdist) = 4;
     
     y = y - 0.5 * tmpdist/lenVar(i);
 end
