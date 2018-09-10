@@ -4,7 +4,7 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 
 * model different nonlinear effects with little effort 
 * automatically select the best subset of covariates
-* decompose complex data into clean non-linear effects, as shown in the following example
+* decompose complex data non-linear effects, as shown in the following example
 
 ![LonGP figure](./AdditiveGP-v8.png)
 
@@ -77,6 +77,7 @@ paraLonGP('./example',slaveId)   % slaveId=10 is a number larger than the total 
 * Both input files must be tab delimitered and end with ".txt" file suffix. 
 * In "X.txt", the continuous covariates (specific to each time point such as age) should be placed in front of the discrete covariates (specific to each individual such as gender). 
 * In "X.txt", the last covariate must be "id" covariate, which is a interger representing an individual.
+* Missing values in "X.txt", e.g. diseAge for control, should be marked as "NaN".
 
 
 
