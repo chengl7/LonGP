@@ -11,6 +11,7 @@ varIndex=3	varName=loc	interaction=1	selected=0	kernelType=6
 varIndex=4	varName=gender	interaction=0	selected=0	kernelType=6
 varIndex=5	varName=group	interaction=0	selected=0	kernelType=6
 varIndex=6	varName=id	interaction=0	selected=0	kernelType=5
+discreteCovariateInteraction=0
 looCutOff=0.8
 scvCutOff=0.95
 nBBSample=20000
