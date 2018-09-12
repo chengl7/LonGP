@@ -57,6 +57,7 @@ for rep = srep:nRep
             gp=gp_unpak(gp,gpw+rand(size(gpw))*2-1,'covariance');  % initialize with different values
             recArr{rep,ri} = gp_mc(gp, x, y, 'nsamples', nMCSample, 'display', nMCDisplay);
         catch
+            warning('Something wrong in MCMC repitition %d chain %d.\n',rep,ri);
             recArr{rep,ri} = [];
         end
         

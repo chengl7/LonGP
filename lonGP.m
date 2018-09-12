@@ -31,6 +31,19 @@ if ischar(targetInd)
     targetInd = str2double(targetInd);
 end
 
+% enusre data files in parent directory are ready
+assert(exist(parentDir,'dir')>0, sprintf('Result directory %s does not exist!\n',parentDir));
+
+paraFile = sprintf('%s%sinput.para.txt',parentDir,filesep);
+assert(exist(paraFile,'file')>0, sprintf('Parameter file %s does not exist!\n',paraFile));
+
+preprocFile = sprintf('%s%spreprocData.mat',parentDir,filesep);
+if ~exist(preprocFile,'file')
+    preprocData(paraFile);
+end
+
+% preparing data files for the given target
+
 resDir = sprintf('%s%sResults%s%d',parentDir,filesep,filesep,targetInd);
 statefile = sprintf('%s%sstate.mat',resDir,filesep);
 

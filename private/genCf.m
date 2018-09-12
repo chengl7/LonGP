@@ -120,6 +120,11 @@ for i=1:nbin-2
     end    
 end
 
+if para.discreteCovariateInteraction==0
+    cf4 = {};
+    cfname4 = {};
+end
+
 cf = [cf1 cf2 cf3 cf4];
 terms = [cfname1 cfname2 cfname3 cfname4];
 modelName = sprintf('model %s ~ %s', modelID, strjoin(terms,'+'));

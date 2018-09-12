@@ -12,6 +12,7 @@ varIndex=4 varName=gender     interaction=0   selected=0  kernelType=6
 varIndex=5 varName=loc     interaction=0   selected=0  kernelType=6                   
 varIndex=6 varName=group     interaction=1   selected=0  kernelType=6
 varIndex=7 varName=id      interaction=1   selected=1  kernelType=5               # last variable MUST be id, selected=1 means id is included in the base model and not subjected to selection
+discreteCovariateInteraction=0    # if interaction between discrete covariates allowed, 1-allowed, 0-not allowed (default)
 delInterTerms=gender*age,gender*group # interaction terms that should not be included, optional
 #delInterTerms=gender*age,gender*group # comment this line if no specific interaction terms in mind
 looCutOff=0.8    # threshold for loocv factor
