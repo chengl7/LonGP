@@ -97,6 +97,10 @@ if ~isfield(para,'discreteCovariateInteraction')
     para.discreteCovariateInteraction = 0;
 end
 
+if ~isfield(para,'figure')
+    para.figure.plot = false;
+end
+
 assert(exist(para.priorFile,'file')>0, sprintf('Prior configuration file %s does not exist.\n',para.priorFile));
 assert(exist(para.kernelFile,'file')>0, sprintf('Kernel configuration file %s does not exist.\n',para.kernelFile));
 
