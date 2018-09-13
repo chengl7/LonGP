@@ -1,6 +1,6 @@
-inputX=/Users/lcheng/Documents/github/LonGP/example/data/X.txt isCol=1
-inputY=/Users/lcheng/Documents/github/LonGP/example/data/Y.txt isCol=0
-resDir=/Users/lcheng/Documents/github/LonGP/example
+inputX=./example/data/X.txt isCol=1
+inputY=./example/data/Y.txt isCol=0
+resDir=./example
 nConVar=2
 nBinVar=4
 priorFile=./conf/prior.template.txt
