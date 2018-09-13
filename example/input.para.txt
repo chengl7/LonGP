@@ -1,16 +1,16 @@
-inputX=./example/data/X.txt isCol=1
-inputY=./example/data/Y.txt isCol=0
+inputX=./example/data/X.txt	isCol=1
+inputY=./example/data/Y.txt	isCol=0
 resDir=./example
 nConVar=2
 nBinVar=4
 priorFile=./conf/prior.template.txt
 kernelFile=./conf/kernel.template.txt
 varIndex=1	varName=age	interaction=1	selected=1	kernelType=1
-varIndex=2	varName=diseAge	interaction=0	selected=0	kernelType=1
-varIndex=3	varName=loc	interaction=1	selected=0	kernelType=6
-varIndex=4	varName=gender	interaction=0	selected=0	kernelType=6
+varIndex=2	varName=diseAge	interaction=0	selected=0	kernelType=3	a=0.500000	b=-5.400000	c=40.000000
+varIndex=3	varName=loc	interaction=0	selected=0	kernelType=6
+varIndex=4	varName=gender	interaction=1	selected=0	kernelType=6
 varIndex=5	varName=group	interaction=0	selected=0	kernelType=6
-varIndex=6	varName=id	interaction=0	selected=0	kernelType=5
+varIndex=6	varName=id	interaction=1	selected=1	kernelType=5
 discreteCovariateInteraction=0
 looCutOff=0.8
 scvCutOff=0.95
@@ -18,5 +18,4 @@ nBBSample=20000
 comVarCutOff=0.01
 maxRunTime=Inf
 maxIdleTime=120
-genTestX=1	ageInd=1	RawXFilledFile=''   testXFilledFile=''
-plotFigure=0
+genTestX=1	ageInd=1	RawXFilledFile=''	testXFilledFile=''
