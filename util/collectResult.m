@@ -18,7 +18,7 @@ modelArr = cell(nTarget,1);
 finalFlagArr = zeros(nTarget,1);
 
 for iTarget=1:nTarget
-    tmpResFile = sprintf('%s/%d/finalResult.mat',parentDir,iTarget);
+    tmpResFile = sprintf('%s/Results/%d/finalResult.mat',parentDir,iTarget);
     
     if exist(tmpResFile,'file')==0
         fprintf('Result file %s is not ready, skip.\n',tmpResFile);
@@ -49,7 +49,7 @@ writetable(tbl, outFile);
 outVarFile = sprintf('%s%svarExplained.txt',parentDir,filesep);
 fid = fopen(outVarFile,'w+');
 for iTarget=idx'
-    tmpResFile = sprintf('%s/%d/finalResult.mat',parentDir,iTarget);
+    tmpResFile = sprintf('%s/Results/%d/finalResult.mat',parentDir,iTarget);
     
     if exist(tmpResFile,'file')==0
         fprintf(fid,'\n');
