@@ -15,15 +15,17 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 * [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later 
 
 ### Steps
-1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)
+1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
 2. Copy [LonGP](https://github.com/chengl7/LonGP/archive/master.zip) to the root folder of GPstuff
 3. Replace the "startup.m" file in GPstuff root folder by "startup.m" under the LonGP folder
-4. (Optional) Start Matlab, double click the "LonGP\_UI.mlappinstall" under folder "MatlabGUI\_installer" folder to install the App.
+4. (Optional) Start Matlab, double click the "LonGP\_UI.mlappinstall" under folder "MatlabGUI\_installer" folder to install the App, this takes less than 10 seconds.
 
 ## Example Usage (Serial)
 * Prepare the input data. The example data are located in the folder "./example/data" as tab delimited text file "X.txt" and "Y.txt".
 * Generate the input parameter configuration file either using the GUI or manually edit using a text editor. The example input parameter file is located in "./example/input.para.txt". To start the GUI, click "APPS" in the top panel and then click "LonGP_UI".
-* Run LonGP analysis. Start Matlab, type the following code. 
+* Run LonGP analysis. Start Matlab, type the following code. To shorten the running time for test purposes, modify file "private/runMCMC.m" to sample less MCMC samples in either of the following ways.  It takes around 8 hours to run for all targets. 
+	*  Comment (use % sign) line 12 and uncomment line 13
+	*  Delete "runMCMC.m" and rename "runMCMC1.m" to "runMCMC.m".
 
 ```
 cd('PATH_TO_LONGP_INSTALLATION')  % change to LonGP directory
@@ -51,8 +53,10 @@ genComPlots(targetResultDirectory, xInd, colorInd, componentInds)
 ```
 ![Example plot](./example/target_1-com_1+3.png)
 
+* Expected output can be found in [exmaple/expectedOutput.zip](./example/expectedOutput.zip)
+
 ## Example Usage (Parallel)
-We assume a cluster system with shared file system to deploy the work, i.e. all nodes access the same file system. LonGP uses the shared file system to synchronize different task.
+We assume a cluster system with shared file system to deploy the work, i.e. all nodes access the same file system. LonGP uses the shared file system to synchronize different task. The running time is ~2 hours with two workers and two slaves, each with 4GB memory.
 
 ```
 % This part is the same for all nodes
