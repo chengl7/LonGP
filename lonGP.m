@@ -318,7 +318,11 @@ else
     % runMCMC for the final selected model
     % check if only continuous
     if isempty(bin.selVarInds)
-        filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, con.selModelPath(end));
+        if isempty(con.selModelPath)
+            filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, 1);
+        else
+            filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, con.selModelPath(end));
+        end
         filename = sprintf('%s%scon-%d.mat', resDir, filesep, 0);
         copyfile(filename1,filename);
     else
