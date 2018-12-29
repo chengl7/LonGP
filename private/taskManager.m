@@ -17,9 +17,15 @@ maxRunTime = duration([Inf,Inf,Inf]); % in minutes
 resume = 0;
 if nargin>3
     p = inputParser;
-    addParameter(p,'maxRunTime', Inf, @isnumeric);
-    addParameter(p,'resume', 0, @isnumeric);
-    parse(p,varargin{:});
+    if exist('OCTAVE_VERSION', 'builtin')
+        p = iparser(p,'addParameter','maxRunTime',Inf,@isnumeric);
+        p = iparser(p,'addParameter','resume',0,@isnumeric);
+        p = iparser(p,'parse',varargin{:});
+    else
+        addParameter(p,'maxRunTime', Inf, @isnumeric);
+        addParameter(p,'resume', 0, @isnumeric);
+        parse(p,varargin{:});
+    end
     maxRunTime = duration([0, p.Results.maxRunTime, 0]);
 end
 startTime = datetime;
@@ -42,7 +48,7 @@ else
     end    
     
     % delete stop file
-    if exist(stopSigFile,'file')>0;
+    if exist(stopSigFile,'file')>0
         delete(stopSigFile);
     end
 end

@@ -7,8 +7,10 @@ function [xmnt, Xt, Xt_mf, XR_mf] = genTestData(parentDir,varargin)
 % Xt_mf: new X in original scale with missing values filled in
 % XR_mf: real X value with missing value filled in
 % 
+% add supports for octave 
+%
 % Lu Cheng
-% 24.04.2018
+% 29.12.2018
 
 paraFile = sprintf('%s%spreprocData.mat',parentDir,filesep);
 assert(exist(paraFile,'file')>0,sprintf('Parameter file %s does not exist, quit!\n',paraFile));
@@ -16,11 +18,21 @@ assert(exist(paraFile,'file')>0,sprintf('Parameter file %s does not exist, quit!
 load(paraFile,'para','normData');
 
 p = inputParser;
-p.addParamValue('nTimePointPerId', [], @isnumeric);
-p.addParamValue('ageInd', [], @isnumeric);
-p.addParamValue('RawXFilledFile', [], @ischar);
 
-p.parse(varargin{:});
+if exist('OCTAVE_VERSION', 'builtin')
+    p = iparser(p,'addParamValue', 'nTimePointPerId', [], @isnumeric);
+    p = iparser(p,'addParamValue', 'ageInd', [], @isnumeric);
+    p = iparser(p,'addParamValue', 'RawXFilledFile', [], @ischar);
+    
+    p = iparser(p,'parse', varargin{:});
+    
+else
+    p.addParamValue('nTimePointPerId', [], @isnumeric);
+    p.addParamValue('ageInd', [], @isnumeric);
+    p.addParamValue('RawXFilledFile', [], @ischar);
+
+    p.parse(varargin{:});
+end
 
 inputs = p.Results;
 

@@ -31,9 +31,15 @@ maxRunTime = duration([Inf,Inf,Inf]); % in minutes
 maxIdleTime = duration([Inf,Inf,Inf]); % in minutes
 if nargin>1
     p = inputParser;
-    addParameter(p,'maxRunTime',Inf,@isnumeric);
-    addParameter(p,'maxIdleTime',Inf,@isnumeric);
-    parse(p,varargin{:});
+    if exist('OCTAVE_VERSION', 'builtin')
+        p = iparser(p,'addParameter','maxRunTime',Inf,@isnumeric);
+        p = iparser(p,'addParameter','maxIdleTime',Inf,@isnumeric);
+        p = iparser(p,'parse',varargin{:});
+    else
+        addParameter(p,'maxRunTime',Inf,@isnumeric);
+        addParameter(p,'maxIdleTime',Inf,@isnumeric);
+        parse(p,varargin{:});
+    end
     maxRunTime = duration([0, p.Results.maxRunTime, 0]);
     maxIdleTime = duration([0, p.Results.maxIdleTime, 0]);
 end
