@@ -96,7 +96,10 @@ while true
         diary on
     end
     
-    fprintf('\nstep %d. time %s.\n', t, datetime);
+%     fprintf('\nstep %d. time %s.\n', t, datetime);
+    if exist('OCTAVE_VERSION', 'builtin')
+        fprintf('\nstep %d. time %s.\n', t, ctime(datetime));
+    end
     
     % get all current folders
     workSubDirInt = getWorkDirs(resDir); % note workSubDir are sorted integers in acending order
