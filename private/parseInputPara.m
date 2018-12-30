@@ -128,7 +128,7 @@ for i=1:para.nConVar
     tmpkername = kernamearr{para.kernel.type(i)};
     assert(any(strcmp(tmpkername,{'se','pe','ns'})),...
         sprintf('kernel type %s for continuous covariate %s not supported.\n',...
-        tmpkername, para.kernel.varName{4}));
+        tmpkername, para.kernel.varName{i}));
     
     if ~isempty(para.kernel.meta{i}) && strcmp(tmpkername,'ns')
         a = para.kernel.meta{i}.a; 
