@@ -1,6 +1,6 @@
-inputX=./example/test/X.txt	isCol=1
-inputY=./example/test/Y.txt	isCol=1
-resDir=./example/test/output
+inputX=./test/X.txt	isCol=1
+inputY=./test/Y.txt	isCol=1
+resDir=./test/output
 nConVar=1
 nBinVar=2
 priorFile=./conf/prior.template.txt
