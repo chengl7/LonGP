@@ -1,4 +1,4 @@
-function [EftArr, empMagArr, normEmpMagArr, cfTerms] = getComponentPredictions(modelResFile, xmnt)
+function [EftArr, VftArr, empMagArr, normEmpMagArr, cfTerms] = getComponentPredictions(modelResFile, xmnt)
 % get predictions of the component on xmnt
 % modelResFile: result file of a given model
 % xmnt: test data to be predicted
@@ -7,6 +7,8 @@ function [EftArr, empMagArr, normEmpMagArr, cfTerms] = getComponentPredictions(m
 % empMagArr: empirical variance of each component
 % normEmpMagArr: normalized empMagArr
 % cfTerms: names of the components
+% 
+% added variance output
 % 
 % Lu Cheng
 % 24.04.2018
@@ -24,10 +26,11 @@ load(modelResFile,'rfull','nCfVar','nInterCf','cfTerms');
 nCf = nCfVar + nInterCf;
 
 EftArr = cell(1,nCf);
+VftArr = cell(1,nCf);
 empMagArr = zeros(1,nCf);
 
 for iCf = 1:nCf
-    EftArr{iCf} = gp_pred(rfull,xmn,ymn,xmnt,'predCf',iCf);
+    [EftArr{iCf}, VftArr{iCf}] = gp_pred(rfull,xmn,ymn,xmnt,'predCf',iCf);
     empMagArr(iCf) = nanvar(EftArr{iCf}); % note the empirical variacne is calculated using xmnt
 end
 
