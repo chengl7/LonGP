@@ -21,16 +21,22 @@ end
 load(dataFile,'ystd');
 load(testFile,'xmnt','Xt_mf','XR_mf');
 
-[EftArr, empMagArr, normEmpMagArr, cfTerms] = getComponentPredictions(modelResFile, xmnt);
+[EftArr, VftArr, empMagArr, normEmpMagArr, cfTerms] = getComponentPredictions(modelResFile, xmnt);
 
 EffArr = EftArr(:)';
+VffArr = VftArr(:)';
 
 for i=1:length(EftArr)
     EffArr{i} = EftArr{i}*ystd;
+    VffArr{i} = sqrt(VftArr{i})*ystd;
 end
 
 yt = cell2mat(EffArr);
-save(predFile,'Xt_mf','XR_mf','yt');
+ystdt = cell2mat(VffArr);
+save(predFile,'Xt_mf','XR_mf','yt','ystdt');
 
 predTextFile = sprintf('%s%stestData.pred.txt', resDir, filesep);
 dlmwrite(predTextFile,yt,'delimiter','\t');
+
+predTextStdFile = sprintf('%s%stestData.pred.std.txt', resDir, filesep);
+dlmwrite(predTextStdFile,ystdt,'delimiter','\t');

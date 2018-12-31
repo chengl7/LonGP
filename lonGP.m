@@ -356,13 +356,14 @@ else
     load(datafile,'xmn','ymn','yFlag');
 
     modelResFile = filename;
-    [EfArr, empMagArr, ~, cfTerms] = getComponentPredictions(modelResFile, xmn);
+    [EfArr, VfArr, empMagArr, ~, cfTerms] = getComponentPredictions(modelResFile, xmn);
     EfArr{end+1} = ymn - sum(cell2mat(EfArr),2);
     empMagArr(end+1) = nanvar(EfArr{end});
     cfTerms{end+1} = 'noise';
     normEmpMagArr = empMagArr/sum(empMagArr);
 
     components.EfArr = EfArr;
+    components.VfArr = VfArr;
     components.empMagArr = empMagArr;
     components.normEmpMagArr = normEmpMagArr;
     components.cfTerms = cfTerms; 
