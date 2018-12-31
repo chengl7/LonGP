@@ -1,4 +1,0 @@
-priorID=1     priorFunc=prior_loggaussian()   mu=0   s2=1.3255    
-priorID=2     priorFunc=prior_t()   mu=0   s2=1   nu=4
-priorID=3     priorFunc=prior_sqrtt()   mu=0   s2=1   nu=20
-priorID=4     priorFunc=prior_sinvchi2() s2=0.01 nu=1
