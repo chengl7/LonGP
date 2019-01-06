@@ -8,17 +8,35 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 
 ![LonGP figure](./AdditiveGP-v8.png)
 
-## Installation
+## Installation (Octave version)
 ### Requirement
-* Linux system
-* Matlab 2016a or later (We will check possibilites of Octave if needed)
-* [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later 
+* Linux/Mac system
+* Octave 4.2.2 or later
+* [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later, or our [tested version](./gpstuff_octave.zip)
 
 ### Steps
 1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
-2. Copy [LonGP](https://github.com/chengl7/LonGP/archive/master.zip) to the root folder of GPstuff
-3. Replace the "startup.m" file in GPstuff root folder by "startup.m" under the LonGP folder
-4. (Optional) Start Matlab, double click the "LonGP\_UI.mlappinstall" under folder "MatlabGUI\_installer" folder to install the App, this takes less than 10 seconds.
+```
+# example installation of Octave 4.2.2 in Ubuntu 18.04
+sudo apt-get install liboctave-dev
+# now start Octave and install dependent package "statistics"
+pkg install -forge io
+pkg install -forge statistics
+# install gpstuff
+cd('PATH_TO_GPstuff_INSTALLATION')  % change to GPstuff directory
+gpstuff_install
+```
+2. Copy [LonGP_Octave](https://github.com/chengl7/LonGP/archive/LonGP_Octave.zip) to the root folder of GPstuff
+3. Unzip "LonGP_Octave.zip" and rename the folder to "LonGP"
+4. Replace the "startup.m" file in GPstuff root folder by "startup.m" under the LonGP folder
+5. test LonGP
+```
+# in Octave command windon
+cd('PATH_TO_GPstuff_INSTALLATION') 
+startup
+cd('LonGP')
+lonGP('./test/output',1)  # run LonGP.m for test data
+```
 
 ## Example Usage (Serial)
 * Prepare the input data. The example data are located in the folder "./example/data" as tab delimited text file "X.txt" and "Y.txt".
