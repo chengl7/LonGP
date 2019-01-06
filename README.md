@@ -12,7 +12,7 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 ### Requirement
 * Linux/Mac system
 * [Octave 4.4.0](https://www.gnu.org/software/octave/) or later
-* [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later, or our [tested version](./gpstuff_octave.zip)
+* [GPstuff-octave-4.7](https://github.com/gpstuff-dev/gpstuff/tree/octave_release)  or later, or our [tested version](./gpstuff_octave.zip)
 
 ### Steps
 1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes. It is recommended to use the tested version, which is included in this LonGP package (gpstuff_octave.zip	).
