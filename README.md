@@ -11,25 +11,37 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 ## Installation (Octave version)
 ### Requirement
 * Linux/Mac system
-* Octave 4.2.2 or later
+* [Octave 4.4.0](https://www.gnu.org/software/octave/) or later
 * [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later, or our [tested version](./gpstuff_octave.zip)
 
 ### Steps
-1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
+1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes. It is recommended to use the tested version, which is included in this LonGP package (gpstuff_octave.zip	).
+
 ```
-# example installation of Octave 4.2.2 in Ubuntu 18.04
-sudo apt-get install liboctave-dev
+# example installation of Octave 4.4.1 in Ubuntu 18.04, follow instructions in 
+# http://ubuntuhandbook.org/index.php/2018/07/install-latest-gnu-octave-4-4-ubuntu-18-04/
+sudo apt-get install flatpak # install flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub org.octave.Octave
+# make alias for octave
+echo "alias octave=\"flatpak run org.octave.Octave\"" >> ~/.bashrc
+source ~/.bashrc
+octave # start octave
+
 # now start Octave and install dependent package "statistics"
 pkg install -forge io
 pkg install -forge statistics
+
 # install gpstuff
 cd('PATH_TO_GPstuff_INSTALLATION')  % change to GPstuff directory
-gpstuff_install
+gpstuff_install()
 ```
-2. Copy [LonGP_Octave](https://github.com/chengl7/LonGP/archive/LonGP_Octave.zip) to the root folder of GPstuff
+
+2. Move [LonGP_Octave](https://github.com/chengl7/LonGP/archive/LonGP_Octave.zip) to the root folder of GPstuff
 3. Unzip "LonGP_Octave.zip" and rename the folder to "LonGP"
 4. Replace the "startup.m" file in GPstuff root folder by "startup.m" under the LonGP folder
 5. test LonGP
+
 ```
 # in Octave command windon
 cd('PATH_TO_GPstuff_INSTALLATION') 
