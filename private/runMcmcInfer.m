@@ -15,8 +15,8 @@ if ~exist(resfile,'file')
 %     load(datafile, 'para','xmn','ymn');
     load(datafile, 'xmn','ymn');
     
-    tmp = load(datafile, 'para');
-    para.kernel.delInterTerms = tmp.para.kernel.delInterTerms; % delInterTerms is updated in the run
+%    tmp = load(datafile, 'para');
+%    para.kernel.delInterTerms = tmp.para.kernel.delInterTerms; % delInterTerms is updated in the run
     
     lik = para.lik;
     nRep = para.nRep;

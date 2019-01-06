@@ -14,8 +14,8 @@ resfilename = sprintf('bin-cmp-base%d-tsm%s.mat', baseModelInd, num2str(binModel
 delInterTerms = {};
 
 if exist(resfile,'file')>0
-    load(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
-    para.kernel.delInterTerms = delInterTerms;
+%     load(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
+    load(resfile);
 else
     % check results ready
     for mid = [baseModelInd binModelInds]
@@ -72,6 +72,8 @@ else
     end
     save(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
 end
+
+para.kernel.delInterTerms = delInterTerms;
 
 if obtainStateLock1(statefile, nLockTrial)
     load(statefile,'bin');

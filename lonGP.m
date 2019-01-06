@@ -43,8 +43,8 @@ preprocFile = sprintf('%s%spreprocData.mat',parentDir,filesep);
 if ~exist(preprocFile,'file')
     [para,normData] = preprocData(paraFile);
 else
-    para=parseInputPara(paraFile);
     load(preprocFile,'normData');
+    para=parseInputPara(paraFile);
 end
 
 % preparing data files for the given target
@@ -298,6 +298,10 @@ while ~isempty(currNextFun)
     
 end
 
+% update the delinterterm information
+[~, ~, currModelName] = genCf(currVarFlagArr, para, '0');
+save(datafile, 'para', '-append');
+
 outstr = strjoin(varNames(currVarFlagArr),',');
 fprintf('final variables: %s\n', outstr);
 fprintf('run mcmc for final model: %s\n', currModelName);
@@ -375,11 +379,13 @@ else
     rawPredTextFile = sprintf('%s%srawData.pred.txt',resDir,filesep);
     dlmwrite(rawPredTextFile, rawPredMat, 'delimiter', '\t');
     
+    rawPredVarMat = cell2mat(components.VfArr)*ystd;
+    rawPredVarTextFile = sprintf('%s%srawData.pred.std.txt',resDir,filesep);
+    dlmwrite(rawPredVarTextFile, rawPredVarMat, 'delimiter', '\t');
+    
     fprintf('final model ready. flag=%d, %s\n', finalFlag, currModelName);
     
 end
-
-
 
 % generate predictions for test data
 testFile = sprintf('%s%stestData.mat', parentDir, filesep);

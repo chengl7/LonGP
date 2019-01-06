@@ -4,19 +4,22 @@ function [R, rfull, flag] = runMCMC(gp,x,y,nRep,statefile)
 % Lu Cheng
 % 15.05.2018
 
+tic
+fprintf('run MCMC\n')
+
 nMCSample = 2500;
 nMCDisplay = 500;
 nMCBurnIn = 501;
 nMCThin = 5;
 
-TEST = [];     % real mode
-% TEST = 'test';   % test mode
+% TEST = [];     % real mode
+TEST = 'test';   % test mode
 if strcmp(TEST,'test')
-    nMCSample = 500;
+    nMCSample = 200;
     nMCDisplay = 100;
     nMCBurnIn = 10;
     nMCThin = 2;
-    nRep = 4;
+    nRep = 2;
 end
 
 % nRep = 1;
@@ -44,14 +47,14 @@ end
 if ~stateFileFlag
     replicateRecArr = cell(1,nRep);
     replicateThetaArr = cell(1,nRep);
-    recArr = cell(4,4);
+    recArr = cell(nRep,4);
     srep = 1;
     sri = 1;
 end
 
 for rep = srep:nRep
     
-    for ri = sri:4
+    for ri = sri:2
         try
             gpw=gp_pak(gp,'covariance');
             gp=gp_unpak(gp,gpw+rand(size(gpw))*2-1,'covariance');  % initialize with different values
@@ -131,3 +134,5 @@ else
     error('rep=%d is not accepted.\n',rep);
 end
 
+t=toc;
+fprintf('mcmc time used %d.\n\n',t);

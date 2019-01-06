@@ -19,4 +19,4 @@ if isfield(rfull,'cf')
     end
 end
 
-y = full;
+y = rfull;

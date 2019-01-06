@@ -1,4 +1,4 @@
-function para=parseInputPara(paraFile)
+function para=parseInputPara(paraFile,varargin)
 % parse the input parameter file
 % Lu Cheng
 % 9.3.2018
@@ -201,6 +201,12 @@ end
 
 assert(strcmp(para.kernel.varName{end},'id'),...
     sprintf('The last covariate is %s, it must be id.\n',para.kernel.varName{end}));
+
+% output mode
+isSilent = nargin>1 && strcmp(varargin{1},'silent');
+if isSilent
+    return
+end
 
 % output information of the parsed kernels, base model
 intOutArr = {'intearction=No','intearction=Yes'};
