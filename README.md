@@ -43,11 +43,11 @@ gpstuff_install()
 5. test LonGP
 
 ```
-# in Octave command windon
+# in Octave command window
 cd('PATH_TO_GPstuff_INSTALLATION') 
 startup
 cd('LonGP')
-lonGP('./test/output',1)  # run LonGP.m for test data
+lonGP('./test/output',1)  % run LonGP.m for test data
 ```
 
 ## Example Usage (Serial)
