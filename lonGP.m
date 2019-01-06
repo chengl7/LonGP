@@ -27,6 +27,8 @@ global  nextArgArr
 global  nLockTrial   % n times to try to get state lock
 global  DEBUG
 
+global para
+
 if ischar(targetInd)
     targetInd = str2double(targetInd);
 end
@@ -39,20 +41,22 @@ assert(exist(paraFile,'file')>0, sprintf('Parameter file %s does not exist!\n',p
 
 preprocFile = sprintf('%s%spreprocData.mat',parentDir,filesep);
 if ~exist(preprocFile,'file')
-    preprocData(paraFile);
+    [para,normData] = preprocData(paraFile);
+else
+    para=parseInputPara(paraFile);
+    load(preprocFile,'normData');
 end
 
 % preparing data files for the given target
-
+resDir0 = sprintf('%s%sResults',parentDir,filesep);
+if ~exist(resDir0,'dir')
+    mkdir(resDir0)
+end
 resDir = sprintf('%s%sResults%s%d',parentDir,filesep,filesep,targetInd);
 statefile = sprintf('%s%sstate.mat',resDir,filesep);
 
-parentProcDataFile = sprintf('%s%spreprocData.mat',parentDir,filesep);
-
-if exist(parentProcDataFile,'file')>0
-    load(parentProcDataFile,'para','normData');
-else
-    error('preprocess file %s does not exit, quit!\n',parentProcDataFile);
+if ~exist(resDir,'dir')
+    mkdir(resDir);
 end
 
 parentRawDataFile = sprintf('%s%srawdata.mat',parentDir,filesep);
@@ -84,10 +88,6 @@ startTime = datetime;
 lastRunTime = datetime;
 
 %% preproc data, saved as "data.mat" in resDir
-
-if ~exist(resDir,'dir')
-    mkdir(resDir);
-end
 
 iTarget = targetInd;
 assert(iTarget<=normData.Y.nTarget);

@@ -101,6 +101,13 @@ if ~isfield(para,'figure')
     para.figure.plot = false;
 end
 
+fixedVarInds = find(para.kernel.varflag);
+workVarInds = find(para.kernel.varflag==0);
+
+para.fixedVarInds = fixedVarInds;
+para.workVarInds = workVarInds;
+
+assert(~isempty(fixedVarInds), sprintf('No covariate is included in the base model.'))
 assert(exist(para.priorFile,'file')>0, sprintf('Prior configuration file %s does not exist.\n',para.priorFile));
 assert(exist(para.kernelFile,'file')>0, sprintf('Kernel configuration file %s does not exist.\n',para.kernelFile));
 

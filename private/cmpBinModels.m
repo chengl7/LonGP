@@ -6,12 +6,16 @@ global statefile
 
 global nBBSample
 global scvCutoff
+global para
 
 resfile = sprintf('%s/bin-cmp-base%d-tsm%s.mat',resDir, baseModelInd, num2str(binModelInds,'-%d'));
 resfilename = sprintf('bin-cmp-base%d-tsm%s.mat', baseModelInd, num2str(binModelInds,'-%d'));
 
+delInterTerms = {};
+
 if exist(resfile,'file')>0
-    load(resfile)
+    load(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
+    para.kernel.delInterTerms = delInterTerms;
 else
     % check results ready
     for mid = [baseModelInd binModelInds]
@@ -43,7 +47,7 @@ else
         % remove interaction terms that have explained variance smaller
         % than predefined cutoff
         modelResFile = sprintf('%s/bin-%d.mat',resDir, selModelInd);
-        pruneInterTerms(modelResFile);
+        delInterTerms = pruneInterTerms(modelResFile);
     else
         tmpNSig = length(sigInds);
         tmpLpyMat = lpyMat(:,sigInds);
@@ -64,9 +68,9 @@ else
         % remove interaction terms that have explained variance smaller
         % than predefined cutoff
         modelResFile = sprintf('%s/bin-%d.mat',resDir, selModelInd);
-        pruneInterTerms(modelResFile);
+        delInterTerms = pruneInterTerms(modelResFile);
     end
-    save(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds');
+    save(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
 end
 
 if obtainStateLock1(statefile, nLockTrial)

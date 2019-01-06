@@ -3,19 +3,13 @@
 F = mfilename;
 S = which(F);
 if exist('OCTAVE_VERSION', 'builtin')
-  subfolders={'diag' 'dist' 'gp' 'mc' 'misc' 'optim' 'tests', 'octave_compat', 'inputparser'};
+  subfolders={'diag' 'dist' 'gp' 'mc' 'misc' 'optim' 'test_gpstuff' 'LonGP' 'LonGP/util' 'LonGP/private' 'LonGP/conf' 'octave_compat', 'inputparser'};
 else
-  subfolders={'diag' 'dist' 'gp' 'mc' 'misc' 'optim' 'tests'};
+  subfolders={'diag' 'dist' 'gp' 'mc' 'misc' 'optim' 'test_gpstuff' 'inputparser'};
 end
 for sf=subfolders
   addpath(strrep(S,[F '.m'],sf{:}))
 end
-
-
-% LonGP extra
-addpath('LonGP')
-addpath('LonGP/conf')
-addpath('LonGP/util')
 
 
 % Alternatively copy following lines to startup.m in MATLAB startup folder

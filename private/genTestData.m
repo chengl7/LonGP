@@ -99,7 +99,7 @@ for i=1:nIndividual
         
         if any(strcmp(para.kernel.name{ivar},{'se','ns'}))
             
-            if exist(inputs.RawXFilledFile,'file')>0
+            if ~isempty(inputs.RawXFilledFile) && exist(inputs.RawXFilledFile,'file')>0
                 tmpdata1(:,tmpVarInds) = procSEVar2(X(tmpInds,tmpVarInds), tmpagevec, tstAge);  % user provide imputed values for missing values
             else
                 ttflag = logical(X(:,ivar*2-1));
