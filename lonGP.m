@@ -76,11 +76,11 @@ nBBSample = para.nBBSample;
 maxRunTime = duration([Inf,Inf,Inf]); % in minutes
 maxIdleTime = duration([Inf,Inf,Inf]); % in minutes
 
-if isfield('maxRunTime',para)
+if isfield(para,'maxRunTime')
     maxRunTime = duration([0, para.maxRunTime, 0]);
 end
 
-if isfield('maxIdleTime',para)
+if isfield(para,'maxRunTime')
     maxIdleTime = duration([0, para.maxIdleTime, 0]);
 end
 
@@ -106,7 +106,7 @@ tmpid = normData.X.X(yFlag,end);
 para.trindex = trindex;
 para.tstindex = tstindex;
 
-% if isfield('XT',normData.X) % in case user specified some text data
+% if isfield(normData.X,'XT') % in case user specified some text data
 %     xmnt = XT;
 % end
 
