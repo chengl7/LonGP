@@ -18,13 +18,16 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
 
 ```
-# start matlab, type
-matlab_install('SuiteSparseOn') # in mac you probably need to change several lines of "const int *dims;" into "const mwSize *dims;" in some c files under "linuxCsource" folders. You could use the following command in a terminal to find out the lines
-# grep -rni "const int \*dims" GPstuff-4.7/
- 
-# in case 'SuiteSparse' cannot be installed, use the file "LonGP/util/gpcf_cat.m.bak" to replace the file "gpstuff/gp/gpcf_cat.m", then type
+# use the file "LonGP/util/gpcf_cat.m.bak" to replace the file "gpstuff/gp/gpcf_cat.m", then type
 matlab_install()
+
+# in mac you probably need to change several lines of "const int *dims;" into "const mwSize *dims;" in some c files under "linuxCsource" folders. You could use the following command in a terminal to find out the lines
+# grep -rni "const int \*dims" GPstuff-4.7/
+
+# Or you could use the tested version of GPstuff-4.7 where all modifications have been applied
+https://github.com/chengl7/LonGP/blob/gpstuff/GPstuff-4.7.zip
 ```
+
 2. Copy [LonGP](https://github.com/chengl7/LonGP/archive/master.zip) to the root folder of GPstuff
 3. Replace the "startup.m" file in GPstuff root folder by "startup.m.bak" under the LonGP folder
 4. test LonGP
