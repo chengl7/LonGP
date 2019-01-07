@@ -27,6 +27,8 @@ global  nextArgArr
 global  nLockTrial   % n times to try to get state lock
 global  DEBUG
 
+global para
+
 if ischar(targetInd)
     targetInd = str2double(targetInd);
 end
@@ -72,11 +74,11 @@ nBBSample = para.nBBSample;
 maxRunTime = duration([Inf,Inf,Inf]); % in minutes
 maxIdleTime = duration([Inf,Inf,Inf]); % in minutes
 
-if isfield('maxRunTime',para)
+if isfield(para,'maxRunTime')
     maxRunTime = duration([0, para.maxRunTime, 0]);
 end
 
-if isfield('maxIdleTime',para)
+if isfield(para,'maxIdleTime')
     maxIdleTime = duration([0, para.maxIdleTime, 0]);
 end
 
@@ -106,7 +108,7 @@ tmpid = normData.X.X(yFlag,end);
 para.trindex = trindex;
 para.tstindex = tstindex;
 
-% if isfield('XT',normData.X) % in case user specified some text data
+% if isfield(normData.X,'XT') % in case user specified some text data
 %     xmnt = XT;
 % end
 
@@ -295,8 +297,11 @@ while ~isempty(currNextFun)
             currTime, startTime, maxRunTime);
         return;
     end
-    
 end
+
+% update the delinterterm information
+[~, ~, currModelName] = genCf(currVarFlagArr, para, '0');
+save(datafile, 'para', '-append');
 
 outstr = strjoin(varNames(currVarFlagArr),',');
 fprintf('final variables: %s\n', outstr);
@@ -374,6 +379,10 @@ else
     rawPredMat = cell2mat(components.EfArr)*ystd;
     rawPredTextFile = sprintf('%s%srawData.pred.txt',resDir,filesep);
     dlmwrite(rawPredTextFile, rawPredMat, 'delimiter', '\t');
+    
+    rawPredVarMat = cell2mat(components.VfArr)*ystd;
+    rawPredVarTextFile = sprintf('%s%srawData.pred.std.txt',resDir,filesep);
+    dlmwrite(rawPredVarTextFile, rawPredVarMat, 'delimiter', '\t');
     
     fprintf('final model ready. flag=%d, %s\n', finalFlag, currModelName);
     

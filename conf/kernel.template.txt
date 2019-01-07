@@ -1,11 +1,11 @@
 kernelType=1  kernelName=se kernelFunc=gpcf_sexp() lengthScale=1 lengthScale_prior=1 magnSigma2=0.5  magnSigma2_prior=3 selectedVariables=NaN
-kernelType=1  kernelName=se_inter kernelFunc=gpcf_sexp() lengthScale=1 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3 selectedVariables=NaN
+kernelType=1  kernelName=se_inter kernelFunc=gpcf_sexp() lengthScale=0.5 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3 selectedVariables=NaN
 
 kernelType=2  kernelName=pe kernelFunc=gpcf_periodic() lengthScale=1 lengthScale_prior=1 magnSigma2=0.5  magnSigma2_prior=3  period=NaN selectedVariables=NaN
-kernelType=2  kernelName=pe_inter kernelFunc=gpcf_periodic() lengthScale=1 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3  period=NaN selectedVariables=NaN
+kernelType=2  kernelName=pe_inter kernelFunc=gpcf_periodic() lengthScale=0.5 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3  period=NaN selectedVariables=NaN
 
 kernelType=3  kernelName=ns kernelFunc=gpcf_sexp() lengthScale=1 lengthScale_prior=1 magnSigma2=0.5  magnSigma2_prior=3 a=NaN b=NaN c=NaN selectedVariables=NaN
-kernelType=3  kernelName=ns_inter kernelFunc=gpcf_sexp() lengthScale=1 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3 a=NaN b=NaN c=NaN selectedVariables=NaN
+kernelType=3  kernelName=ns_inter kernelFunc=gpcf_sexp() lengthScale=0.5 lengthScale_prior=2 magnSigma2=0.5  magnSigma2_prior=3 a=NaN b=NaN c=NaN selectedVariables=NaN
 
 kernelType=4  kernelName=co kernelFunc=gpcf_constant() constSigma2=0.1  constSigma2_prior=2
 

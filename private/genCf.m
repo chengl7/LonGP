@@ -37,7 +37,7 @@ conVarName = para.kernel.varName(1:nConVar);
 binVarName = para.kernel.varName(nConVar+(1:nBinVar));
 
 % prespecified interaction terms not to be included
-if isfield('delInterTerms',para.kernel)
+if isfield(para.kernel,'delInterTerms')
     delInterTerms = para.kernel.delInterTerms;
 else
     delInterTerms = [];

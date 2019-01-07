@@ -44,7 +44,7 @@ end
 if ~stateFileFlag
     replicateRecArr = cell(1,nRep);
     replicateThetaArr = cell(1,nRep);
-    recArr = cell(4,4);
+    recArr = cell(nRep,4);
     srep = 1;
     sri = 1;
 end
