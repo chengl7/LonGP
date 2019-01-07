@@ -13,9 +13,11 @@ end
 
 
 % LonGP extra
-addpath('LonGP')
-addpath('LonGP/conf')
-addpath('LonGP/util')
+gpstuffdir = strrep(S,[F '.m'],'');
+longpdir = [gpstuffdir 'LonGP'];
+addpath(longpdir);
+addpath([longpdir filesep 'conf']);
+addpath([longpdir filesep 'util']);
 
 
 % Alternatively copy following lines to startup.m in MATLAB startup folder

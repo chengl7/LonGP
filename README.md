@@ -24,7 +24,7 @@ matlab_install('SuiteSparse')
 matlab_install()
 ```
 2. Copy [LonGP](https://github.com/chengl7/LonGP/archive/master.zip) to the root folder of GPstuff
-3. Replace the "startup.m" file in GPstuff root folder by "startup.m" under the LonGP folder
+3. Replace the "startup.m" file in GPstuff root folder by "startup.m.bak" under the LonGP folder
 4. test LonGP
 
 ```
