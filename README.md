@@ -19,7 +19,9 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 
 ```
 # start matlab, type
-matlab_install('SuiteSparseOn')
+matlab_install('SuiteSparseOn') # in mac you probably need to change several lines of "const int *dims;" into "const mwSize *dims;" in some c files under "linuxCsource" folders. You could use the following command in a terminal to find out the lines
+# grep -rni "const int \*dims" GPstuff-4.7/
+ 
 # in case 'SuiteSparse' cannot be installed, use the file "LonGP/util/gpcf_cat.m.bak" to replace the file "gpstuff/gp/gpcf_cat.m", then type
 matlab_install()
 ```
