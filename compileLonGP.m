@@ -21,20 +21,17 @@ mcc('-v','./GUI/init_window.mlapp','-o','gui','-W','main:gui','-T','link:exe','-
 
 str =  computer;
 if strcmp(str,'GLNXA64')
-%     delete([outDir filesep '*.c']);
-%     delete([outDir filesep '*.prj']);
-%     delete([outDir filesep '*.log']);
-%     delete([outDir filesep '*.sh']);
-% 
+    delete([outDir filesep '.*']);
+    delete([outDir filesep '*.txt']);
+    delete([outDir filesep '*.log']);
+    delete([outDir filesep '*.sh']);
+
 %     movefile([outDir filesep 'readme.txt'],[outDir filesep 'mcr_readme.txt']);
-%     
-%     sysName = 'linux';
-%     
-%     copyfile([fileDir filesep 'hierBAPS_' sysName '.sh'], [outDir filesep 'hierBAPS.sh']);
-%     copyfile([fileDir filesep 'readme_' sysName '.txt'], [outDir filesep]);
-%     copyfile([fileDir filesep 'seqs.fa'], [outDir filesep]);
-%         
-%     zip(['hierBAPS_' sysName '_64bit.zip'],outDir);
+    
+    sysName = 'linux';
+    
+    copyfile([fileDir filesep 'LonGP_' sysName '.sh'], [outDir filesep 'LonGP.sh']);
+    zip(['LonGP_' sysName '_64bit.zip'],outDir);
     
 elseif strcmp(str,'MACI64')
     delete([outDir filesep '*.log']);
