@@ -6,9 +6,12 @@ global statefile
 
 global nBBSample
 global looCutoff
+global para
 
 resfile = sprintf('%s/con-cmp-base%d-tsm%s.mat', resDir, baseModelInd, num2str(conModelInds,'-%d')); % tsm: to select model
 resfilename = sprintf('con-cmp-base%d-tsm%s.mat', baseModelInd, num2str(conModelInds,'-%d'));
+
+delInterTerms = {};
 
 if exist(resfile,'file')>0
     load(resfile);
@@ -44,7 +47,7 @@ else
         % remove interaction terms that have explained variance smaller
         % than predefined cutoff
         modelResFile = sprintf('%s/con-%d.mat',resDir, selModelInd);
-        pruneInterTerms(modelResFile);
+        delInterTerms = pruneInterTerms(modelResFile);
     else
         tmpNSig = length(sigInds);
         tmpLpyMat = lpyMat(:,sigInds);
@@ -65,11 +68,13 @@ else
         % remove interaction terms that have explained variance smaller
         % than predefined cutoff
         modelResFile = sprintf('%s/con-%d.mat',resDir, selModelInd);
-        pruneInterTerms(modelResFile);
+        delInterTerms = pruneInterTerms(modelResFile);
     end
 
     save(resfile, 'flag', 'selModelInd', 'looVec', 'sigInds');
 end
+
+para.kernel.delInterTerms = delInterTerms;
 
 if obtainStateLock1(statefile, nLockTrial)
     load(statefile,'con');
