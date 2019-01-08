@@ -8,6 +8,20 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 
 ![LonGP figure](./AdditiveGP-v8.png)
 
+## Citation
+If you use LonGP in your publication, please cite LonGP by
+
+Cheng et al., LonGP: an additive Gaussian process regression model for longitudinal study designs, [bioRxiv](https://www.biorxiv.org/content/early/2018/02/06/259564).
+
+### Real datasets
+We have preprocessed two real datasets in our paper, please find the datasets and the corresponding citations as following.
+
+* [Proteomics longitudinal data](./datasets/liuData.xlsx)
+  * Liu et al., Temporal expression profiling of plasma proteins reveals oxidative stress in early stages of Type 1 Diabetes progression, [Journal of Proteomics (2018).](https://www.sciencedirect.com/science/article/pii/S1874391917303512?via%3Dihub) 
+* [Metagenomics longitudinal data](./datasets/metagenomicsData.xlsx)
+  * Vatanen et al., Variation in Microbiome LPS Immunogenicity Contributes to Autoimmunity in Humans, [Cell (2016).](https://www.cell.com/cell/fulltext/S0092-8674(16)30398-1)
+
+
 ## Installation
 ### Requirement
 * Linux system or MAC
@@ -157,4 +171,3 @@ args: arguments for the corresponding command of “LONGP_CMD”
 LonGP.sh gui # start GUI to setup input parameter files “input.para.txt”
 LonGP.sh lonGP ./test/output 1  # run serial lonGP for test dataset 
 ```
-
