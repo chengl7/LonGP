@@ -14,8 +14,8 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 * Matlab 2016a or later
 * [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later 
 * In case Matlab is not availble, you could use 
-** Compiled version of [LonGP](#install-compiled-longp)
-** Octave version of [LonGP](/chengl7/LonGP/tree/LonGP_Octave)
+  * Compiled version of [LonGP](#install-compiled-longp)
+  * Octave version of [LonGP](https://github.com/chengl7/LonGP/tree/LonGP_Octave)
 
 ### Steps
 1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
@@ -77,6 +77,15 @@ genComPlots(targetResultDirectory, xInd, colorInd, componentInds)
 ```
 ![Example plot](./example/target_1-com_1+3.png)
 
+* The output directory "./example/Results/i" contains text files for making tailored plots according to users' needs.
+  * Predictions for the original data points
+     * ./example/rawdata.filled.txt: the original points for prediction, with certain covariates imputed when necessary 
+     * rawData.pred.txt: each column is the predicted mean of each component, the last column is the noise
+     * rawData.pred.std.txt: each column is the standard deviation of the predictive distribution 
+  * Predictions for test data points
+     * ./example/testdata.filled.txt: the imputed test data points for prediction
+     * testData.pred.txt: each column is the predicted mean of each component, the last column is the residual
+     * testData.pred.std.txt: each column is the standard deviation of the predictive distribution 
 * Expected output can be found in [exmaple/expectedOutput.zip](./example/expectedOutput.zip)
 
 ## Example Usage (Parallel)
@@ -110,7 +119,7 @@ paraLonGP('./example',slaveId)   % slaveId=10 is a number larger than the total 
 
 ## Install compiled LonGP
 ### Download the compiled LonGP
-[LonGP\_linux\_R2017b]()  or [LonGP\_mac\_R2018a]()
+[LonGP\_linux\_R2017b.zip]()  or [LonGP\_mac\_R2018a.zip]()
 
 ### Install Matlab Runtime
 
@@ -123,9 +132,10 @@ Download and install
 ### Configure LonGP
 Unzip "LonGP\_linux\_R2017b.zip" or "LonGP\_mac\_R2018a.zip" to get the directory "LonGP\_binary"
 
-In Line 16 of “LonGP.sh” in folder “LonGP\_binary”
+In Line 16 of “LonGP.sh” in folder “LonGP\_binary” 
 ```
-MCRROOT=“PATH_TO_MCR_INSTALLATION” # Set PATH_TO_MCR_INSTALLATION to the directory where you installed MCR.
+# Set PATH_TO_MCR_INSTALLATION to the directory where you installed MCR.
+MCRROOT=“PATH_TO_MCR_INSTALLATION” 
 ```
 
 ### Run LonGP
