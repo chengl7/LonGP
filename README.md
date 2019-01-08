@@ -10,9 +10,12 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 
 ## Installation
 ### Requirement
-* Linux system
-* Matlab 2016a or later (We will check possibilites of Octave if needed)
+* Linux system or MAC
+* Matlab 2016a or later
 * [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff)  or later 
+* In case Matlab is not availble, you could use 
+** Compiled version of [LonGP](#install-compiled-longp)
+** Octave version of [LonGP](/chengl7/LonGP/tree/LonGP_Octave)
 
 ### Steps
 1. Install [GPstuff 4.7](https://github.com/gpstuff-dev/gpstuff), this takes ~10 minutes
@@ -105,4 +108,43 @@ paraLonGP('./example',slaveId)   % slaveId=10 is a number larger than the total 
 * Missing values in "X.txt", e.g. diseAge for control, should be marked as "NaN".
 
 
+## Install compiled LonGP
+### Download the compiled LonGP
+[LonGP\_linux\_R2017b]()  or [LonGP\_mac\_R2018a]()
+
+### Install Matlab Runtime
+
+Download and install 
+[Matlab Runtime R2017b for Linux](http://ssd.mathworks.com/supportfiles/downloads/R2017b/deployment_files/R2017b/installers/glnxa64/MCR_R2017b_glnxa64_installer.zip)
+ or 
+[Matlab Runtime R2018a for Mac](http://ssd.mathworks.com/supportfiles/downloads/R2018a/deployment_files/R2018a/installers/maci64/MCR_R2018a_maci64_installer.dmg.zip)
+
+
+### Configure LonGP
+Unzip "LonGP\_linux\_R2017b.zip" or "LonGP\_mac\_R2018a.zip" to get the directory "LonGP\_binary"
+
+In Line 16 of “LonGP.sh” in folder “LonGP\_binary”
+```
+MCRROOT=“PATH_TO_MCR_INSTALLATION” # Set PATH_TO_MCR_INSTALLATION to the directory where you installed MCR.
+```
+
+### Run LonGP
+A general command looks like 
+
+`PATH_TO_LonGP_binary/LonGP.sh LONGP_CMD args`
+
+It is the same as running the Matlab function
+`LONGP_CMD(args)`
+
+We have the following options
+```
+LONGP_CMD: lonGP, paraLonGP, genComPlots, collectResult, gui
+args: arguments for the corresponding command of “LONGP_CMD”
+```
+
+### Example
+```
+LonGP.sh gui # start GUI to setup input parameter files “input.para.txt”
+LonGP.sh lonGP ./test/output 1  # run serial lonGP for test dataset 
+```
 
