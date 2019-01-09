@@ -133,7 +133,7 @@ paraLonGP('./example',slaveId)   % slaveId=10 is a number larger than the total 
 
 ## Install compiled LonGP
 ### Download the compiled LonGP
-[LonGP\_linux\_R2017b.zip]()  or [LonGP\_mac\_R2018a.zip]()
+[LonGP\_linux\_R2017b.zip](https://research.cs.aalto.fi/csb/software/longp/LonGP_linux_64bit_Matlab_R2017b.zip)  or [LonGP\_mac\_R2018a.zip](https://research.cs.aalto.fi/csb/software/longp/LonGP_mac_64bit_Matlab_R2018a.zip)
 
 ### Install Matlab Runtime
 
