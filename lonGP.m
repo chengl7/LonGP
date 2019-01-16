@@ -27,6 +27,8 @@ global  nextArgArr
 global  nLockTrial   % n times to try to get state lock
 global  DEBUG
 
+global para
+
 if ischar(targetInd)
     targetInd = str2double(targetInd);
 end
@@ -72,11 +74,11 @@ nBBSample = para.nBBSample;
 maxRunTime = duration([Inf,Inf,Inf]); % in minutes
 maxIdleTime = duration([Inf,Inf,Inf]); % in minutes
 
-if isfield('maxRunTime',para)
+if isfield(para,'maxRunTime')
     maxRunTime = duration([0, para.maxRunTime, 0]);
 end
 
-if isfield('maxIdleTime',para)
+if isfield(para,'maxIdleTime')
     maxIdleTime = duration([0, para.maxIdleTime, 0]);
 end
 
@@ -106,7 +108,7 @@ tmpid = normData.X.X(yFlag,end);
 para.trindex = trindex;
 para.tstindex = tstindex;
 
-% if isfield('XT',normData.X) % in case user specified some text data
+% if isfield(normData.X,'XT') % in case user specified some text data
 %     xmnt = XT;
 % end
 
@@ -295,8 +297,11 @@ while ~isempty(currNextFun)
             currTime, startTime, maxRunTime);
         return;
     end
-    
 end
+
+% update the delinterterm information
+[~, ~, currModelName] = genCf(currVarFlagArr, para, '0');
+save(datafile, 'para', '-append');
 
 outstr = strjoin(varNames(currVarFlagArr),',');
 fprintf('final variables: %s\n', outstr);
@@ -318,7 +323,11 @@ else
     % runMCMC for the final selected model
     % check if only continuous
     if isempty(bin.selVarInds)
-        filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, con.selModelPath(end));
+        if isempty(con.selModelPath)
+            filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, 1);
+        else
+            filename1 = sprintf('%s%scon-%d.mat', resDir, filesep, con.selModelPath(end));
+        end
         filename = sprintf('%s%scon-%d.mat', resDir, filesep, 0);
         copyfile(filename1,filename);
     else
@@ -352,13 +361,14 @@ else
     load(datafile,'xmn','ymn','yFlag');
 
     modelResFile = filename;
-    [EfArr, empMagArr, ~, cfTerms] = getComponentPredictions(modelResFile, xmn);
+    [EfArr, VfArr, empMagArr, ~, cfTerms] = getComponentPredictions(modelResFile, xmn);
     EfArr{end+1} = ymn - sum(cell2mat(EfArr),2);
     empMagArr(end+1) = nanvar(EfArr{end});
     cfTerms{end+1} = 'noise';
     normEmpMagArr = empMagArr/sum(empMagArr);
 
     components.EfArr = EfArr;
+    components.VfArr = VfArr;
     components.empMagArr = empMagArr;
     components.normEmpMagArr = normEmpMagArr;
     components.cfTerms = cfTerms; 
@@ -369,6 +379,10 @@ else
     rawPredMat = cell2mat(components.EfArr)*ystd;
     rawPredTextFile = sprintf('%s%srawData.pred.txt',resDir,filesep);
     dlmwrite(rawPredTextFile, rawPredMat, 'delimiter', '\t');
+    
+    rawPredVarMat = cell2mat(components.VfArr)*ystd;
+    rawPredVarTextFile = sprintf('%s%srawData.pred.std.txt',resDir,filesep);
+    dlmwrite(rawPredVarTextFile, rawPredVarMat, 'delimiter', '\t');
     
     fprintf('final model ready. flag=%d, %s\n', finalFlag, currModelName);
     

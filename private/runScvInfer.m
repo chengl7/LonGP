@@ -4,6 +4,8 @@ global resDir
 global nLockTrial
 global statefile
 
+global para
+
 modelStem = num2str(modelInd);
 resfile = sprintf('%s%sbin-%s.mat',resDir, filesep, modelStem);
 resfilename = sprintf('bin-%s.mat', modelStem);
@@ -11,7 +13,7 @@ resfilename = sprintf('bin-%s.mat', modelStem);
 if ~exist(resfile,'file')
     % load data
     datafile = sprintf('%s%sdata.mat',resDir, filesep);
-    load(datafile, 'para','xmn','ymn');
+    load(datafile, 'xmn','ymn');
     lik = para.lik;
     trindex = para.trindex;
     tstindex = para.tstindex;
@@ -20,7 +22,7 @@ if ~exist(resfile,'file')
     [cf, cfName, modelName, cfTerms, cfPara, cfMagnParaInds, nCfVar, nInterCf] = genCf(currVarFlagArr, para, modelStem);
     gp = gp_set('lik',lik,'cf',cf);
 
-    [~, cvpreds] = gp_kfcv(gp, xmn, ymn, 'inf_method','IA','display','off','k',length(trindex),'trindex',trindex,'tstindex',tstindex,'pred','lp','display','off');
+    [~, cvpreds] = gp_kfcv(gp, xmn, ymn, 'inf_method','IA','display','off','k',length(trindex),'trindex',trindex,'tstindex',tstindex,'pred','lp');
     lpy = cvpreds.lpyt;
     
     rfull = gp_ia(gp, xmn, ymn);

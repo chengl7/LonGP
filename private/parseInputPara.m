@@ -97,6 +97,10 @@ if ~isfield(para,'discreteCovariateInteraction')
     para.discreteCovariateInteraction = 0;
 end
 
+if ~isfield(para,'figure')
+    para.figure.plot = false;
+end
+
 assert(exist(para.priorFile,'file')>0, sprintf('Prior configuration file %s does not exist.\n',para.priorFile));
 assert(exist(para.kernelFile,'file')>0, sprintf('Kernel configuration file %s does not exist.\n',para.kernelFile));
 
@@ -124,7 +128,7 @@ for i=1:para.nConVar
     tmpkername = kernamearr{para.kernel.type(i)};
     assert(any(strcmp(tmpkername,{'se','pe','ns'})),...
         sprintf('kernel type %s for continuous covariate %s not supported.\n',...
-        tmpkername, para.kernel.varName{4}));
+        tmpkername, para.kernel.varName{i}));
     
     if ~isempty(para.kernel.meta{i}) && strcmp(tmpkername,'ns')
         a = para.kernel.meta{i}.a; 
