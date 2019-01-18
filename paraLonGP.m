@@ -10,6 +10,10 @@ function paraLonGP(resDir, iTarget, varargin)
 global DEBUG
 DEBUG=true;
 
+if ischar(iTarget)
+iTarget = str2double(iTarget);
+end
+
 assert(exist(resDir,'dir')>0, sprintf('Result directory %s does not exist!\n',resDir));
 
 paraFile = sprintf('%s%sinput.para.txt',resDir,filesep);
