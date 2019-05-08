@@ -11,7 +11,9 @@ LonGP is a tool for performing Gaussian process regression analysis on logitudin
 ## Citation
 If you use LonGP in your publication, please cite LonGP by
 
-Cheng et al., LonGP: an additive Gaussian process regression model for longitudinal study designs, [bioRxiv](https://www.biorxiv.org/content/early/2018/02/06/259564).
+Cheng et al., An additive Gaussian process regression model for interpretable non-parametric analysis of longitudinal data, [Nature Communications (2019)](https://www.nature.com/articles/s41467-019-09785-8).
+
+The biorxiv version paper is available [here](https://www.biorxiv.org/content/early/2018/02/06/259564).
 
 ### Real datasets
 We have preprocessed two real datasets in our paper, please find the datasets and the corresponding citations as following.
