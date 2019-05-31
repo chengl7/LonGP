@@ -27,7 +27,7 @@ global  nextArgArr
 global  nLockTrial   % n times to try to get state lock
 global  DEBUG
 
-global para
+% global para
 
 if ischar(targetInd)
     targetInd = str2double(targetInd);
@@ -300,8 +300,9 @@ while ~isempty(currNextFun)
 end
 
 % update the delinterterm information
+load(datafile, 'para')  % para in datafile is updated in "cmpBinModels.m" or "cmpConModels.m"
 [~, ~, currModelName] = genCf(currVarFlagArr, para, '0');
-save(datafile, 'para', '-append');
+% save(datafile, 'para', '-append'); % para in datafile is updated in "cmpBinModels.m" or "cmpConModels.m"
 
 outstr = strjoin(varNames(currVarFlagArr),',');
 fprintf('final variables: %s\n', outstr);

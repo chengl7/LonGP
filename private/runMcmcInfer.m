@@ -3,7 +3,7 @@ function runMcmcInfer(currVarFlagArr, modelInd)
 global resDir
 global nLockTrial
 global statefile
-global para
+% global para
 
 modelStem = num2str(modelInd);
 resfile = sprintf('%s%scon-%s.mat', resDir, filesep, modelStem);
@@ -12,7 +12,7 @@ resfilename = sprintf('con-%s.mat', modelStem);
 if ~exist(resfile,'file')
     % load data
     datafile = sprintf('%s%sdata.mat',resDir, filesep);
-    load(datafile, 'xmn','ymn');
+    load(datafile, 'xmn','ymn', 'para');
     lik = para.lik;
     nRep = para.nRep;
 

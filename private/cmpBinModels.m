@@ -7,7 +7,7 @@ global statefile
 global nBBSample
 global scvCutoff
 
-global para
+% global para
 
 resfile = sprintf('%s/bin-cmp-base%d-tsm%s.mat',resDir, baseModelInd, num2str(binModelInds,'-%d'));
 resfilename = sprintf('bin-cmp-base%d-tsm%s.mat', baseModelInd, num2str(binModelInds,'-%d'));
@@ -73,7 +73,10 @@ else
     save(resfile, 'flag', 'selModelInd', 'scvVec', 'sigInds', 'delInterTerms');
 end
 
+datafile = sprintf('%s%sdata.mat',resDir,filesep);
+load(datafile,'para');
 para.kernel.delInterTerms = delInterTerms;
+save(datafile,'para','-append'); % update para in data file
 
 if obtainStateLock1(statefile, nLockTrial)
     load(statefile,'bin');
