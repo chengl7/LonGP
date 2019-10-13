@@ -1,4 +1,4 @@
-function genComPlots1(resDir, xImputeTable, iTarget, xInd, componentInds, colorVec, colorNames, plotGroupVec, plotGroupNames)
+function genComPlots1(resDir, xImputeTable, iTarget, xInd, componentInds, colorVec, colorNames, plotGroupVec, plotGroupNames, outFigFileName)
 % plot component figures
 % resDir: directory storing results
 % xImputeTable: X with missing values imputed
@@ -84,12 +84,12 @@ str1 = sprintf('Component %s VS real intensity',strjoin(components.cfTerms(compo
 title(str1)
 
 % save figure
-comName = sprintf('%d+',componentInds);
-comName(end)=[];
-xName = rawdata.varNames{xInd};
-figName = sprintf('%s%s%d%sCom%s-%s', resDir, filesep, iTarget, filesep, comName, xName);
+% comName = sprintf('%d+',componentInds);
+% comName(end)=[];
+% xName = rawdata.varNames{xInd};
+% figName = sprintf('%s%s%d%sCom%s-%s', targetDir, filesep, iTarget, filesep, comName, xName);
 
-% saveas(gcf,figName,'png');
+saveas(gcf,outFigFileName,'png');
 
 function plotOneByOne(plotAge, plotEff, groupVec, groupNames, styleArr, idVec,  lw)
 
@@ -111,6 +111,9 @@ if length(groupNames)>length(styleArr)
     warning(tmpstr);
     groupVec = ones(size(groupVec));    
     uniqGrp = 1;
+    legendFlag = false;
+else
+    legendFlag = true;
 end
 
 nUG = length(uniqGrp);
@@ -136,7 +139,7 @@ for i = uniqId
     end
 end
 
-if nUG>1
+if nUG>1 && legendFlag
     legend(fhArr,labels)
 end
 
