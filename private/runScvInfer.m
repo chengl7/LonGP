@@ -4,7 +4,7 @@ global resDir
 global nLockTrial
 global statefile
 
-global para
+% global para
 
 modelStem = num2str(modelInd);
 resfile = sprintf('%s%sbin-%s.mat',resDir, filesep, modelStem);
@@ -13,7 +13,8 @@ resfilename = sprintf('bin-%s.mat', modelStem);
 if ~exist(resfile,'file')
     % load data
     datafile = sprintf('%s%sdata.mat',resDir, filesep);
-    load(datafile, 'xmn','ymn');
+    %load(datafile, 'xmn','ymn');
+    load(datafile, 'xmn','ymn','para');
     lik = para.lik;
     trindex = para.trindex;
     tstindex = para.tstindex;

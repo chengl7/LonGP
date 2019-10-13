@@ -6,7 +6,7 @@ global statefile
 
 global nBBSample
 global looCutoff
-global para
+% global para
 
 resfile = sprintf('%s/con-cmp-base%d-tsm%s.mat', resDir, baseModelInd, num2str(conModelInds,'-%d')); % tsm: to select model
 resfilename = sprintf('con-cmp-base%d-tsm%s.mat', baseModelInd, num2str(conModelInds,'-%d'));
@@ -74,7 +74,10 @@ else
     save(resfile, 'flag', 'selModelInd', 'looVec', 'sigInds');
 end
 
+datafile = sprintf('%s%sdata.mat',resDir,filesep);
+load(datafile,'para');
 para.kernel.delInterTerms = delInterTerms;
+save(datafile,'para','-append'); % update para in data file
 
 if obtainStateLock1(statefile, nLockTrial)
     load(statefile,'con');

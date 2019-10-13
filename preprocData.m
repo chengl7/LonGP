@@ -59,9 +59,9 @@ for tmp1 = tmpuniqid(:)'
         tmpFlag = X(tmpIdInds,tmpivar*2-1)==1;
         tmpInds = tmpIdInds(tmpFlag);
         if ~isempty(tmpInds) && ~all(X(tmpInds,tmpivar*2)==X(tmpInds(1),tmpivar*2))
-            fprintf('uniqid=%d ivar=%d %s\n',tmp1,tmpivar,para.kernel.varNames{tmpivar});
+            fprintf('uniqid=%d ivar=%d %s\n',tmp1,tmpivar,para.kernel.varName{tmpivar});
             X(tmpIdInds,tmpivar*2)
-            error('The binary/categorical variable for the same individual do not have the same value.\n');
+            warning('The binary/categorical variable for the same individual do not have the same value.\n');
         end
     end
 end
