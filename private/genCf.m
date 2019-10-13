@@ -63,6 +63,7 @@ end
 % kernels for interactions between continuous and binary covariates
 cf3 = {};
 cfname3 = {};
+idInterFlag=false;
 for i=1:ncon
     iCon = conInds(i);
     if conInterArr(iCon)==0
@@ -80,13 +81,25 @@ for i=1:ncon
         end
         
         % construct interactions
-        tmpcfcon = getMaskKernel(para,1,iCon);
+        if j<nbin
+            % kernels such as age*group will have the same length scale as
+            % shared age
+            tmpcfcon = getMaskKernel(para,1,iCon);
+        elseif j==nbin && ~idInterFlag
+            % kernels such as age*id will use interaction length scale,
+            % only one interaction term with id is allowed
+            tmpcfcon = getMaskInterKernel(para,iCon);
+            idInterFlag = true;
+        else
+            continue
+        end
         tmpcfbin = getMaskKernel(para,0,iBin);
         tmpcf = gpcf_prod('cf',{tmpcfcon, tmpcfbin});
         
         cf3{end+1} = tmpcf; 
         cfname3{end+1} = tmpProdCfName;
     end
+    
 end
 
 
@@ -176,7 +189,14 @@ else
     end
 end
 
+function mker = getMaskInterKernel(para,ind)
+% handle the mask for a continuous interaction kernel
 
+if para.kernel.conMaskFlag(ind)
+    mker = gpcf_prod('cf',{para.kernel.conInterKerArr{ind}, para.kernel.conMaskKerArr{ind}});
+else
+    mker = para.kernel.conKerArr{ind};
+end
 
 
 
