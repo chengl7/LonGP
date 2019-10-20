@@ -89,7 +89,9 @@ title(str1)
 % xName = rawdata.varNames{xInd};
 % figName = sprintf('%s%s%d%sCom%s-%s', targetDir, filesep, iTarget, filesep, comName, xName);
 
-saveas(gcf,outFigFileName,'png');
+if ~isempty(outFigFileName) && ~exist(strjoin(outFigFileName,'png'),'file')
+    saveas(gcf,outFigFileName,'png');
+end
 
 function plotOneByOne(plotAge, plotEff, groupVec, groupNames, styleArr, idVec,  lw)
 
