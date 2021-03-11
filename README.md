@@ -38,7 +38,7 @@ We have preprocessed two real datasets in our paper, please find the datasets an
 
 ```
 # use the file "LonGP/util/gpcf_cat.m.bak" to replace the file "gpstuff/gp/gpcf_cat.m", then type
-matlab_install()
+matlab_install()  # please replace "gpcf_cat.m" before installation!
 
 # in mac you probably need to change several lines of "const int *dims;" into "const mwSize *dims;" in some c files under "linuxCsource" folders. You could use the following command in a terminal to find out the lines
 # grep -rni "const int \*dims" GPstuff-4.7/
